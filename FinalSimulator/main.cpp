@@ -21,9 +21,9 @@ double angle_y = 0;
 double angle_z = 0;
 
 vector<Leaf*>* trace_pointer;
-int num;
 bool isOrtho = false;// view in orthogonal mode
 bool isCM = false;// view trace of center of mass
+int num;// number of leaves
 int view = 1;// view fall in real-time
 int ts = 0;// rendering time-step
 
