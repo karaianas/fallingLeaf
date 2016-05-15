@@ -11,13 +11,15 @@
 #include "Value.h"
 #include "Exp.h"
 
+#include "glm/glm.hpp"
+
 #define pi 3.14152
 
 using namespace std;
 
 /******** Global Variables ********/
 double angle_x = 0;
-double angle_y = 0;
+double angle_y = -45;
 double angle_z = 0;
 
 vector<Leaf*>* trace_pointer;
@@ -42,7 +44,7 @@ int main(int argc, char** argv)
 	Value* V1 = new Value();
 	//V1->set_height(10.0f);
 	V1->set_length(0.1f);// leaf is 10cm wide
-	//V1->set_friction(20.0f, 0.3f);
+	V1->set_friction(20.0f, 0.3f);
 	//V1->set_density(1.0f);// viscous liquid
 	//V1->set_density(0.05f);// air
 
@@ -165,8 +167,8 @@ void menu(int value)
 
 void timer(int value)
 {
-	if (ts < num - 3)
-		ts += 3;
+	if (ts < num - 4)
+		ts += 4;
 	glutPostRedisplay();
 	glutTimerFunc(10, timer, 0);// 10ms
 }

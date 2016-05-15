@@ -39,5 +39,6 @@ void init_display(bool ortho)
 		glLoadIdentity();
 	}
 
+	//gluLookAt(100, 0, 100, 0.0, 0, 0.0, 0, 1.0, 0.0);// eye, at, up
 	gluLookAt(0, 0, 200, 0.0, 0, 0.0, 0, 1.0, 0.0);// eye, at, up
 }
