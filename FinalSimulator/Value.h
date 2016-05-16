@@ -13,7 +13,7 @@ using namespace std;
 class Value{
 public:
 	// constructor
-	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 20.0f, double _k_hor = 0.2f, double _len = 1.0f, double _den = 0.1f, \
+	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 20.0f, double _k_hor = 0.2f, double _len = 0.1f, double _den = 0.1f, \
 		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = -10.1f)
 	{
 		g = _g;// gravity

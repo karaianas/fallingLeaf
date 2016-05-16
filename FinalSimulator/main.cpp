@@ -17,7 +17,7 @@ using namespace std;
 
 /******** Global Variables ********/
 double angle_x = 0;
-double angle_y = 0;
+double angle_y = -45;
 double angle_z = 0;
 
 vector<Leaf*>* trace_pointer;
@@ -25,7 +25,8 @@ bool isOrtho = false;// view in orthogonal mode
 bool isCM = false;// view trace of center of mass
 int num;// number of leaves
 int view = 1;// view fall in real-time
-int ts = 0;// rendering time-step
+int rt = 0;// rendering time
+int step = 3;// rendering time steps
 
 /******** Global Functions ********/
 void display();
@@ -38,21 +39,18 @@ void lab_config();
 
 int main(int argc, char** argv)
 {
-	// precomputation
+	// Experiment 01: variable(length)
 	Value* V1 = new Value();
-	//V1->set_height(10.0f);
-	V1->set_length(0.1f);// leaf is 10cm wide
-	//V1->set_friction(20.0f, 0.3f);
-	//V1->set_density(1.0f);// viscous liquid
-	//V1->set_density(0.05f);// air
+	V1->set_length(0.01);// default is 0.1m
 
 	Exp E1(V1);
 	trace_pointer = E1.get_trace();
 	num = E1.get_size();
-
-	// TEST01: y positions
-	//for (int i = 0; i < num; i++)
-	//	cout << trace_pointer->at(i)->get_y() << endl;
+	
+	//V1->set_height(10.0f);
+	//V1->set_friction(20.0f, 0.3f);
+	//V1->set_density(1.0f);// viscous liquid
+	//V1->set_density(0.05f);// air
 	
 	// graphical interface
 	glutInit(&argc, argv);
@@ -103,9 +101,9 @@ void display()
 	else
 	{
 		if (isCM)
-			trace_pointer->at(ts)->draw_center_of_mass();
+			trace_pointer->at(rt)->draw_center_of_mass();
 		else
-			trace_pointer->at(ts)->draw_leaf();
+			trace_pointer->at(rt)->draw_leaf();
 	}
 
 	glPopMatrix();
@@ -153,20 +151,21 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	}
 
+	rt = 0;
 	glutPostRedisplay();
 }
 
 void menu(int value)
 {
 	view = value;
-
+	rt = 0;
 	glutPostRedisplay();
 }
 
 void timer(int value)
 {
-	if (ts < num - 3)
-		ts += 3;
+	if (rt < num - step)
+		rt += step;
 	glutPostRedisplay();
-	glutTimerFunc(10, timer, 0);// 10ms
+	glutTimerFunc(1, timer, 0);// 1ms
 }

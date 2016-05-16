@@ -76,6 +76,11 @@ public:
 		return y;
 	}
 
+	double get_x()
+	{
+		return x;
+	}
+
 private:
 	// position
 	double x;
