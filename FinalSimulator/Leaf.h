@@ -14,9 +14,14 @@
 #pragma once
 
 #include <iostream>
+#include <vector>
 #include <glut.h>
 #include <gl.h>
 #include <glu.h>
+
+#include "glm/glm.hpp"
+
+using namespace std;
 
 class Leaf{
 public:
