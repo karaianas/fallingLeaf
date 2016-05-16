@@ -33,6 +33,8 @@ public:
 		theta_0 = _theta_0;// degrees
 		w_0 = _w_0;// radians
 		phi_0 = theta_0;
+
+		turns = 0;// number of turns
 	}
 
 	// set functions
@@ -113,6 +115,11 @@ public:
 	double get_t()
 	{
 		return t;
+	}
+
+	int get_turns()
+	{
+		return turns;
 	}
 
 	// calculation functions
@@ -222,9 +229,17 @@ public:
 		phi_1 = phi_0 + (180.0 / pi * (w_0 + w_1)) / 2 * t;
 
 		while (phi_1 > 360)
+		{
 			phi_1 -= 360;
+			turns++;
+		}
 		while (phi_1 < -360)
+		{
 			phi_1 += 360;
+			turns++;
+		}
+
+		// (phi_0 * phi_1)
 
 		// update
 		u_0 = u_1;
@@ -240,4 +255,5 @@ public:
 
 private:
 	double g, t, k_ver, k_hor, len, den, x_0, y_0, u_0, v_0, theta_0, w_0, phi_0;
+	int turns;
 };

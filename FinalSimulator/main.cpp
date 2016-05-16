@@ -25,7 +25,7 @@ double angle_z = 0;
 vector<Leaf*>* trace_pointer;
 bool isOrtho = false;// view in orthogonal mode
 bool isCM = false;// view trace of center of mass
-int num;// number of leaves
+int num = 0;// number of leaves
 int view = 1;// view fall in real-time
 int rt = 0;// rendering time
 int step = 3;// rendering time steps
@@ -38,21 +38,16 @@ void timer(int value);
 
 void init_display(bool ortho);
 void lab_config();
+bool console();
 
 int main(int argc, char** argv)
 {
-	// Experiment 01: variable(length)
+	// start experiment
 	Value* V1 = new Value();
-	V1->set_length(0.1f);// leaf is 10cm wide
 	Exp E1(V1);
 	trace_pointer = E1.get_trace();
 	num = E1.get_size();
 
-	//V1->set_height(10.0f);
-	//V1->set_friction(20.0f, 0.3f);
-	//V1->set_density(1.0f);// viscous liquid
-	//V1->set_density(0.05f);// air
-	
 	// graphical interface
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -148,6 +143,8 @@ void keyboard(unsigned char key, int x, int y)
 		else
 			isCM = true;
 		break;
+	case 'x':
+		console();
 	default:
 		break;
 	}
@@ -169,4 +166,77 @@ void timer(int value)
 		rt += step;
 	glutPostRedisplay();
 	glutTimerFunc(1, timer, 0);// 1ms
+}
+
+bool console()
+{
+	int opt1 = 0;
+	cout << endl << "Start Experiment" << endl;
+	cout << "[1] Default Experiment" << endl;
+	cout << "[2] New Experiment" << endl << "Option: ";
+	cin >> opt1;
+	
+	if ((opt1 != 2) && (opt1 != 1))
+		return false;
+
+	// initialize global variables
+	angle_x = 0; angle_y = -45; angle_z = 0;
+	isOrtho = false; isCM = false;
+	num = 0;
+	view = 1;
+	rt = 0;
+	step = 3;
+
+	Value* V1 = new Value();
+
+	// [2] New Experiment
+	if (opt1 == 2)
+	{
+		bool setting = true;
+		int opt2 = 0;
+
+		// set variables
+		while (setting)
+		{
+			cout << endl << "[0] End Setting" << endl;
+			cout << "[1] Set Length" << endl;
+			cout << "[2] Set Drag Coefficients" << endl;
+			cout << "[3] Set Density" << endl << "Option: ";
+			cin >> opt2;
+
+			switch (opt2)
+			{
+			case 0:
+				setting = false;
+				break;
+			case 1:
+				double len;
+				printf("Enter length in meters: ");
+				scanf("%lf", &len);
+				V1->set_length(len);
+				break;
+			case 2:
+				double c_ver, c_hor;
+				printf("Enter vertical coeff <= 100: ");
+				scanf("%lf", &c_ver);
+				printf("Enter horizontal coeff <= 1: ");
+				scanf("%lf", &c_hor);
+				V1->set_friction(c_ver, c_hor);
+				break;
+			case 3:
+				double den;
+				printf("Enter density: ");
+				scanf("%lf", &den);
+				V1->set_density(den);
+				break;
+			}
+		}
+	}
+
+	// start experiment
+	Exp* E1 = new Exp(V1);
+	trace_pointer = E1->get_trace();
+	num = E1->get_size();
+	
+	return true;
 }

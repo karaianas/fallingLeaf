@@ -23,19 +23,27 @@ public:
 			trace_leaves.push_back(L);
 			num_leaves++;
 		}
-		angle = get_descent_angle();
 
-		cout << "Experiment has ended" << endl;
+		angle = get_descent_angle();
+		tumbling_frequency = V->get_turns();
+
+		cout << "------------------------------------" << endl;
+		cout << "Experiment has ended" << endl << endl;
 		cout << "Number of leaves rendered: " << num_leaves << endl;
 		cout << "Amount of physical time: " << num_leaves * (V->get_t()) << endl;
+		cout << "Landing distance: " << V->get_x() << endl;
 		cout << "Descent angle: " << angle << endl;
+		cout << "Number of turns: " << tumbling_frequency << endl;
+		cout << "------------------------------------" << endl;
 	}
 
+	// get pointer to all leaves
 	vector<Leaf*>* get_trace()
 	{
 		return &trace_leaves;
 	}
 
+	// get number of leaves
 	int get_size()
 	{
 		return num_leaves;
@@ -53,8 +61,15 @@ public:
 		return phi * 180 / 3.142;
 	}
 
+	// get number of turns i.e. tumbling frequency
+	int get_tumbling_frequency()
+	{
+		return tumbling_frequency;
+	}
+
 private:
 	vector<Leaf*> trace_leaves;
 	int num_leaves;
 	float angle;
+	int tumbling_frequency;
 };
