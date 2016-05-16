@@ -19,7 +19,7 @@
 #include <gl.h>
 #include <glu.h>
 
-#include "glm/glm.hpp"
+//#include "glm/glm.hpp"
 
 using namespace std;
 

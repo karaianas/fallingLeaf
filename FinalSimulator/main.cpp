@@ -11,6 +11,8 @@
 #include "Value.h"
 #include "Exp.h"
 
+//#include "glm/glm.hpp"
+
 #define pi 3.14152
 
 using namespace std;
@@ -41,12 +43,11 @@ int main(int argc, char** argv)
 {
 	// Experiment 01: variable(length)
 	Value* V1 = new Value();
-	V1->set_length(0.01);// default is 0.1m
-
+	V1->set_length(0.1f);// leaf is 10cm wide
 	Exp E1(V1);
 	trace_pointer = E1.get_trace();
 	num = E1.get_size();
-	
+
 	//V1->set_height(10.0f);
 	//V1->set_friction(20.0f, 0.3f);
 	//V1->set_density(1.0f);// viscous liquid
