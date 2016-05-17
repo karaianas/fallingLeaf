@@ -217,7 +217,7 @@ bool console()
 				break;
 			case 2:
 				double c_ver, c_hor;
-				printf("Enter vertical coeff <= 100: ");
+				printf("Enter vertical coeff <= 50: ");
 				scanf("%lf", &c_ver);
 				printf("Enter horizontal coeff <= 1: ");
 				scanf("%lf", &c_hor);
