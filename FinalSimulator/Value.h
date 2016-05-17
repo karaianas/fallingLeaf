@@ -34,7 +34,7 @@ public:
 		w_0 = _w_0;// radians
 		phi_0 = theta_0;
 
-		turns = 0;// number of turns
+		turns = 1;// number of turns
 	}
 
 	// set functions
@@ -231,15 +231,13 @@ public:
 		while (phi_1 > 360)
 		{
 			phi_1 -= 360;
-			turns++;
+			turns += 2;
 		}
 		while (phi_1 < -360)
 		{
 			phi_1 += 360;
-			turns++;
+			turns += 2;
 		}
-
-		// (phi_0 * phi_1)
 
 		// update
 		u_0 = u_1;
