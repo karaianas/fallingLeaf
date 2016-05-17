@@ -52,9 +52,23 @@ public:
 	// *** need to get more preciese descent angle from linear approximation
 	float get_descent_angle()
 	{
+		/*
 		float drop_height = trace_leaves[0]->get_y();
 
 		float land_distance = trace_leaves[num_leaves - 1]->get_x();
+		*/
+
+		float drop_height = 0;
+		float land_distance = 0;
+
+		for (int i = 0; i < num_leaves; i++)
+		{
+			drop_height += trace_leaves[i]->get_y();
+			land_distance += trace_leaves[i]->get_x();
+		}
+
+		drop_height /= (float)num_leaves;
+		land_distance /= (float)num_leaves;
 
 		float phi = atan(drop_height / land_distance);
 		

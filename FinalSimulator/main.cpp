@@ -171,10 +171,10 @@ void timer(int value)
 bool console()
 {
 	int opt1 = 0;
-	cout << endl << "Start Experiment" << endl;
-	cout << "[1] Default Experiment" << endl;
-	cout << "[2] New Experiment" << endl << "Option: ";
-	cin >> opt1;
+	printf("\nStart Experiment\n");
+	printf("[1] Default Experiment\n");
+	printf("[2] New Experiment\nOption: ");
+	scanf("%d", &opt1);
 	
 	if ((opt1 != 2) && (opt1 != 1))
 		return false;
@@ -198,11 +198,11 @@ bool console()
 		// set variables
 		while (setting)
 		{
-			cout << endl << "[0] End Setting" << endl;
-			cout << "[1] Set Length" << endl;
-			cout << "[2] Set Drag Coefficients" << endl;
-			cout << "[3] Set Density" << endl << "Option: ";
-			cin >> opt2;
+			printf("\n[0] End Setting\n");
+			printf("[1] Set Length\n");
+			printf("[2] Set Drag Coefficients\n");
+			printf("[3] Set Density\nOption: ");
+			scanf("%d", &opt2);
 
 			switch (opt2)
 			{
@@ -229,6 +229,8 @@ bool console()
 				scanf("%lf", &den);
 				V1->set_density(den);
 				break;
+			default:
+				return false;
 			}
 		}
 	}

@@ -86,6 +86,11 @@ public:
 		phi_0 = phi;
 	}
 
+	void set_time(double _time)
+	{
+		t = _time;
+	}
+
 	// get functions
 	double get_y()
 	{
@@ -156,14 +161,17 @@ public:
 		a = alpha(u_0, v_0);
 
 		// place theta_0 in range of (-90, 90)
-		if (theta_0 >= 90 && theta_0 < 270)
-			theta_0 = theta_0 - 180;
-		else if (theta_0 >= 270 && theta_0 < 360)
-			theta_0 = 180 - theta_0;
-		else if (theta_0 <= -90 && theta_0 > -270)
-			theta_0 = -theta_0 - 180;
-		else if (theta_0 <= -270 && theta_0 > -360)
-			theta_0 = -180 + theta_0;
+		while ((theta_0 >= 90) || (theta_0 <= -90))
+		{
+			if (theta_0 >= 90 && theta_0 < 270)
+				theta_0 = theta_0 - 180;
+			else if (theta_0 >= 270 && theta_0 < 360)
+				theta_0 = 180 - theta_0;
+			else if (theta_0 <= -90 && theta_0 > -270)
+				theta_0 = -theta_0 - 180;
+			else if (theta_0 <= -270 && theta_0 > -360)
+				theta_0 = -180 + theta_0;
+		}
 
 		double s = 0;
 		s = sign(v_0, a, theta_0);
@@ -208,20 +216,23 @@ public:
 
 		theta_1 = theta_0 + (180.0 / pi * (w_0 + w_1)) / 2 * t;
 
-		while (theta_1 > 360)
+		while (theta_1 >= 360)
 			theta_1 -= 360;
-		while (theta_1 < -360)
+		while (theta_1 <= -360)
 			theta_1 += 360;
 
 		// place theta_1 in range of (-90, 90)
-		if (theta_1 >= 90 && theta_1 < 270)
-			theta_1 = theta_1 - 180;
-		else if (theta_1 >= 270 && theta_1 < 360)
-			theta_1 = 180 - theta_1;
-		else if (theta_1 <= -90 && theta_1 > -270)
-			theta_1 = -theta_1 - 180;
-		else if (theta_1 <= -270 && theta_1 > -360)
-			theta_1 = -180 + theta_1;
+		while ((theta_1 >= 90) || (theta_1 <= -90))
+		{
+			if (theta_1 >= 90 && theta_1 < 270)
+				theta_1 = theta_1 - 180;
+			else if (theta_1 >= 270 && theta_1 < 360)
+				theta_1 = 180 - theta_1;
+			else if (theta_1 <= -90 && theta_1 > -270)
+				theta_1 = -theta_1 - 180;
+			else if (theta_1 <= -270 && theta_1 > -360)
+				theta_1 = -180 + theta_1;
+		}
 
 		// actual angle
 		double phi_1 = 0;
