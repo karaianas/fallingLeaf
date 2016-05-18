@@ -34,8 +34,102 @@ public:
 		w_0 = _w_0;// radians
 		phi_0 = theta_0;
 
+<<<<<<< HEAD
 		turns = 0;// number of turns
 		flag = false;
+=======
+		turns = 1;// number of turns
+	}
+
+	// set functions
+	void set_friction(double ver_coeff, double hor_coeff)
+	{
+		k_ver = ver_coeff;
+		k_hor = hor_coeff;
+	}
+
+	void set_height(double height)
+	{
+		y_0 = height;
+	}
+
+	void set_length(double length)
+	{
+		len = length;
+	}
+
+	void set_density(double density)
+	{
+		den = density;
+	}
+
+	void set_position(double x, double y)
+	{
+		x_0 = x;
+		y_0 = y;
+	}
+
+	void set_velocity(double u, double v)
+	{
+		u_0 = u;
+		v_0 = v;
+	}
+
+	void set_theta(double theta)
+	{
+		theta_0 = theta;
+	}
+
+	void set_omega(double omega)
+	{
+		w_0 = omega;
+	}
+
+	void set_phi(double phi)
+	{
+		phi_0 = phi;
+	}
+
+	void set_time(double _time)
+	{
+		t = _time;
+	}
+
+	// get functions
+	double get_y()
+	{
+		return y_0;
+	}
+
+	double get_x()
+	{
+		return x_0;
+	}
+
+	double get_z()
+	{
+		return 0.0f;
+	}
+
+	double get_length()
+	{
+		return len;
+	}
+
+	double get_phi()
+	{
+		return phi_0;
+	}
+
+	double get_t()
+	{
+		return t;
+	}
+
+	int get_turns()
+	{
+		return turns;
+>>>>>>> origin/ver01
 	}
 
 	// calculation functions
@@ -72,14 +166,17 @@ public:
 		a = alpha(u_0, v_0);
 
 		// place theta_0 in range of (-90, 90)
-		if (theta_0 >= 90 && theta_0 < 270)
-			theta_0 = theta_0 - 180;
-		else if (theta_0 >= 270 && theta_0 < 360)
-			theta_0 = 180 - theta_0;
-		else if (theta_0 <= -90 && theta_0 > -270)
-			theta_0 = -theta_0 - 180;
-		else if (theta_0 <= -270 && theta_0 > -360)
-			theta_0 = -180 + theta_0;
+		while ((theta_0 >= 90) || (theta_0 <= -90))
+		{
+			if (theta_0 >= 90 && theta_0 < 270)
+				theta_0 = theta_0 - 180;
+			else if (theta_0 >= 270 && theta_0 < 360)
+				theta_0 = 180 - theta_0;
+			else if (theta_0 <= -90 && theta_0 > -270)
+				theta_0 = -theta_0 - 180;
+			else if (theta_0 <= -270 && theta_0 > -360)
+				theta_0 = -180 + theta_0;
+		}
 
 		double s = 0;
 		s = sign(v_0, a, theta_0);
@@ -124,20 +221,23 @@ public:
 
 		theta_1 = theta_0 + (180.0 / pi * (w_0 + w_1)) / 2 * t;
 
-		while (theta_1 > 360)
+		while (theta_1 >= 360)
 			theta_1 -= 360;
-		while (theta_1 < -360)
+		while (theta_1 <= -360)
 			theta_1 += 360;
 
 		// place theta_1 in range of (-90, 90)
-		if (theta_1 >= 90 && theta_1 < 270)
-			theta_1 = theta_1 - 180;
-		else if (theta_1 >= 270 && theta_1 < 360)
-			theta_1 = 180 - theta_1;
-		else if (theta_1 <= -90 && theta_1 > -270)
-			theta_1 = -theta_1 - 180;
-		else if (theta_1 <= -270 && theta_1 > -360)
-			theta_1 = -180 + theta_1;
+		while ((theta_1 >= 90) || (theta_1 <= -90))
+		{
+			if (theta_1 >= 90 && theta_1 < 270)
+				theta_1 = theta_1 - 180;
+			else if (theta_1 >= 270 && theta_1 < 360)
+				theta_1 = 180 - theta_1;
+			else if (theta_1 <= -90 && theta_1 > -270)
+				theta_1 = -theta_1 - 180;
+			else if (theta_1 <= -270 && theta_1 > -360)
+				theta_1 = -180 + theta_1;
+		}
 
 		// actual angle
 		double phi_1 = 0;
@@ -147,12 +247,12 @@ public:
 		while (phi_1 > 360)
 		{
 			phi_1 -= 360;
-			turns++;
+			turns += 2;
 		}
 		while (phi_1 < -360)
 		{
 			phi_1 += 360;
-			turns++;
+			turns += 2;
 		}
 
 		// update

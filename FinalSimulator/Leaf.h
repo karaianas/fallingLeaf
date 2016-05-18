@@ -42,6 +42,7 @@ public:
 		glTranslated(x, y, z);
 		glRotated(theta, 0, 0, 1);
 		glScaled(10 * w, 1, 10 * h);
+		//glScaled(2, 1, 10 * h);
 
 		// front face
 		glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
