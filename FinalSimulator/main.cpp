@@ -171,10 +171,17 @@ void timer(int value)
 bool console()
 {
 	int opt1 = 0;
+	/*
 	cout << endl << "Start Experiment" << endl;
 	cout << "[1] Default Experiment" << endl;
 	cout << "[2] New Experiment" << endl << "Option: ";
 	cin >> opt1;
+	*/
+
+	printf("\nStart Experiment\n");
+	printf("[1] Default Experiment\n");
+	printf("[2] New Experiment\nOption: ");
+	scanf("%d", &opt1);
 	
 	if ((opt1 != 2) && (opt1 != 1))
 		return false;

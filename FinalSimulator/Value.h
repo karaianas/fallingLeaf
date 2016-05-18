@@ -35,91 +35,7 @@ public:
 		phi_0 = theta_0;
 
 		turns = 0;// number of turns
-	}
-
-	// set functions
-	void set_friction(double ver_coeff, double hor_coeff)
-	{
-		k_ver = ver_coeff;
-		k_hor = hor_coeff;
-	}
-
-	void set_height(double height)
-	{
-		y_0 = height;
-	}
-
-	void set_length(double length)
-	{
-		len = length;
-	}
-
-	void set_density(double density)
-	{
-		den = density;
-	}
-
-	void set_position(double x, double y)
-	{
-		x_0 = x;
-		y_0 = y;
-	}
-
-	void set_velocity(double u, double v)
-	{
-		u_0 = u;
-		v_0 = v;
-	}
-
-	void set_theta(double theta)
-	{
-		theta_0 = theta;
-	}
-
-	void set_omega(double omega)
-	{
-		w_0 = omega;
-	}
-
-	void set_phi(double phi)
-	{
-		phi_0 = phi;
-	}
-
-	// get functions
-	double get_y()
-	{
-		return y_0;
-	}
-
-	double get_x()
-	{
-		return x_0;
-	}
-
-	double get_z()
-	{
-		return 0.0f;
-	}
-
-	double get_length()
-	{
-		return len;
-	}
-
-	double get_phi()
-	{
-		return phi_0;
-	}
-
-	double get_t()
-	{
-		return t;
-	}
-
-	int get_turns()
-	{
-		return turns;
+		flag = false;
 	}
 
 	// calculation functions
@@ -239,8 +155,6 @@ public:
 			turns++;
 		}
 
-		// (phi_0 * phi_1)
-
 		// update
 		u_0 = u_1;
 		v_0 = v_1;
@@ -253,7 +167,93 @@ public:
 		phi_0 = phi_1;
 	}
 
+	// set functions
+	void set_friction(double ver_coeff, double hor_coeff)
+	{
+		k_ver = ver_coeff;
+		k_hor = hor_coeff;
+	}
+
+	void set_height(double height)
+	{
+		y_0 = height;
+	}
+
+	void set_length(double length)
+	{
+		len = length;
+	}
+
+	void set_density(double density)
+	{
+		den = density;
+	}
+
+	void set_position(double x, double y)
+	{
+		x_0 = x;
+		y_0 = y;
+	}
+
+	void set_velocity(double u, double v)
+	{
+		u_0 = u;
+		v_0 = v;
+	}
+
+	void set_theta(double theta)
+	{
+		theta_0 = theta;
+	}
+
+	void set_omega(double omega)
+	{
+		w_0 = omega;
+	}
+
+	void set_phi(double phi)
+	{
+		phi_0 = phi;
+	}
+
+	// get functions
+	double get_y()
+	{
+		return y_0;
+	}
+
+	double get_x()
+	{
+		return x_0;
+	}
+
+	double get_z()
+	{
+		return 0.0f;
+	}
+
+	double get_length()
+	{
+		return len;
+	}
+
+	double get_phi()
+	{
+		return phi_0;
+	}
+
+	double get_t()
+	{
+		return t;
+	}
+
+	int get_turns()
+	{
+		return turns;
+	}
+
 private:
 	double g, t, k_ver, k_hor, len, den, x_0, y_0, u_0, v_0, theta_0, w_0, phi_0;
 	int turns;
+	bool flag;
 };
