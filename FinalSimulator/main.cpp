@@ -201,7 +201,8 @@ bool console()
 			printf("\n[0] End Setting\n");
 			printf("[1] Set Length\n");
 			printf("[2] Set Drag Coefficients\n");
-			printf("[3] Set Density\nOption: ");
+			printf("[3] Set Density\n");
+			printf("[4] Aspect Ratio length\nOption: ");
 			scanf("%d", &opt2);
 
 			switch (opt2)
@@ -228,6 +229,12 @@ bool console()
 				printf("Enter density: ");
 				scanf("%lf", &den);
 				V1->set_density(den);
+				break;
+			case 4:
+				double as_len;
+				printf("Enter length: ");
+				scanf("%lf", &as_len);
+				V1->set_aspect_ratio(as_len);
 				break;
 			default:
 				return false;

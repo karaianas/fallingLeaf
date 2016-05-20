@@ -56,7 +56,14 @@ public:
 
 	void set_density(double density)
 	{
+		
 		den = density;
+	}
+
+	void set_aspect_ratio(double length)
+	{
+		len = length;
+		den = len;
 	}
 
 	void set_position(double x, double y)
