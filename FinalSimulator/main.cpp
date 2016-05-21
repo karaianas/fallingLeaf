@@ -3,9 +3,11 @@
 #include <string>
 #include <vector>
 #include <math.h>
+
 #include <glut.h>
 #include <gl.h>
 #include <glu.h>
+#include <glaux.h>
 
 #include "Leaf.h"
 #include "Value.h"
@@ -39,6 +41,9 @@ void timer(int value);
 void init_display(bool ortho);
 void lab_config();
 bool console();
+
+AUX_RGBImageRec * LoadBMP(char *szFilename);
+int LoadGLTextures();
 
 int main(int argc, char** argv)
 {
@@ -81,7 +86,9 @@ void display()
 	glRotated(angle_z, 0.0f, 0.0f, 1.0f);
 
 	glPushMatrix();
+	//glTranslated(0.0f, -5.0f, 0.0f);
 	glTranslated(0.0f, -50.0f, 0.0f);
+
 	lab_config();
 
 	if (view == 1)
@@ -101,7 +108,7 @@ void display()
 		else
 			trace_pointer->at(rt)->draw_leaf();
 	}
-
+	
 	glPopMatrix();
 
 	glPopMatrix();
@@ -145,6 +152,7 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 	case 'x':
 		console();
+		break;
 	default:
 		break;
 	}
@@ -201,8 +209,7 @@ bool console()
 			printf("\n[0] End Setting\n");
 			printf("[1] Set Length\n");
 			printf("[2] Set Drag Coefficients\n");
-			printf("[3] Set Density\n");
-			printf("[4] Aspect Ratio length\nOption: ");
+			printf("[3] Set Density\nOption: ");
 			scanf("%d", &opt2);
 
 			switch (opt2)
@@ -229,12 +236,6 @@ bool console()
 				printf("Enter density: ");
 				scanf("%lf", &den);
 				V1->set_density(den);
-				break;
-			case 4:
-				double as_len;
-				printf("Enter length: ");
-				scanf("%lf", &as_len);
-				V1->set_aspect_ratio(as_len);
 				break;
 			default:
 				return false;

@@ -13,6 +13,9 @@ using namespace std;
 class Value{
 public:
 	// constructor
+	// den is 0.143f for book paper
+	// 0.1m * 1.0m paper; mass is 0.700kg
+	// 0.1m * 0.5m paper; mass is 0.350kg
 	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 20.0f, double _k_hor = 0.2f, double _len = 0.1f, double _den = 0.1f, \
 		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = -10.1f)
 	{
@@ -35,6 +38,7 @@ public:
 		phi_0 = theta_0;
 
 		turns = 1;// number of turns
+
 	}
 
 	// set functions
@@ -58,12 +62,6 @@ public:
 	{
 		
 		den = density;
-	}
-
-	void set_aspect_ratio(double length)
-	{
-		len = length;
-		den = len;
 	}
 
 	void set_position(double x, double y)
