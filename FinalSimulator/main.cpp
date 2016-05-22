@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <ctime>
 
 #include <glut.h>
 #include <gl.h>
@@ -48,10 +49,17 @@ int LoadGLTextures();
 int main(int argc, char** argv)
 {
 	// start experiment
+	clock_t begin = clock();
+
 	Value* V1 = new Value();
 	Exp E1(V1);
 	trace_pointer = E1.get_trace();
 	num = E1.get_size();
+
+	clock_t end = clock();
+
+	double precomputation_time = double(end - begin) / CLOCKS_PER_SEC;
+	cout << "Precomputation time: " << precomputation_time << "s[CPU clock]" << endl;
 
 	// graphical interface
 	glutInit(&argc, argv);
