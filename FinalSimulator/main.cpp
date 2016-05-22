@@ -181,7 +181,7 @@ void timer(int value)
 	if (rt < num - step)
 		rt += step;
 	glutPostRedisplay();
-	glutTimerFunc(1, timer, 0);// 1ms
+	glutTimerFunc(10, timer, 0);// 10ms
 }
 
 bool console()

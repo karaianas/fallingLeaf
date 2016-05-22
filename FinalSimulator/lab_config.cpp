@@ -17,6 +17,7 @@ void lab_config()
 	// 100 * 100 * 100 config
 	// xy-plane
 	glColor3f(0.5, 0.5, 0.5);
+	//glColor3f(1, 1, 1);
 	//glColor3f(0.3, 0.2, 0.2);
 	for (int i = 0; i <= 100; i += 5)
 	{
@@ -33,6 +34,7 @@ void lab_config()
 
 	// yz-plane
 	glColor3f(0.2, 0.2, 0.2);
+	//glColor3f(1, 1, 1);
 	//glColor3f(0.3, 0.3, 0.1);
 	for (int i = 0; i <= 100; i += 5)
 	{
@@ -48,7 +50,8 @@ void lab_config()
 	}
 
 	// zx-plane
-	glColor3f(0.1, 0.1, 0.1);
+	glColor3f(0.35, 0.35, 0.35);
+	//glColor3f(1, 1, 1);
 	//glColor3f(0.2, 0.2, 0.3);
 	for (int i = 0; i <= 100; i += 5)
 	{
