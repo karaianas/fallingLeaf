@@ -86,6 +86,11 @@ int main(int argc, char** argv)
 
 void display()
 {
+	// initialization
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glClearColor(1, 1, 1, 1);// white background
+
 	init_display(isOrtho);
 
 	glPushMatrix();
@@ -101,18 +106,22 @@ void display()
 
 	if (view == 1)
 	{
-		for (int i = 0; i < num; i++)
+		for (int i = 0; i < num; i += 1)//200---------------------------------------------------------------
 		{
 			if (isCM)
-				trace_pointer->at(i)->draw_center_of_mass();
+			{
+				trace_pointer->at(i)->draw_center_of_mass(isOrtho);
+				//if (i * 200 < num)//58
+				//	trace_pointer->at(i * 200)->draw_leaf3();
+			}
 			else
-				trace_pointer->at(i)->draw_leaf();
+				trace_pointer->at(i)->draw_leaf3();
 		}
 	}
 	else
 	{
 		if (isCM)
-			trace_pointer->at(rt)->draw_center_of_mass();
+			trace_pointer->at(rt)->draw_center_of_mass(isOrtho);
 		else
 			trace_pointer->at(rt)->draw_leaf();
 	}
@@ -129,22 +138,22 @@ void keyboard(unsigned char key, int x, int y)
 	switch (key)
 	{
 	case 'a':
-		angle_x += 45;
+		angle_x += 30;
 		break;
 	case 's':
 		angle_y += 45;
 		break;
 	case 'd':
-		angle_z += 45;
+		angle_z += 30;
 		break;
 	case 'q':
-		angle_x -= 45;
+		angle_x -= 30;
 		break;
 	case 'w':
 		angle_y -= 45;
 		break;
 	case 'e':
-		angle_z -= 45;
+		angle_z -= 30;
 		break;
 	case 'o':
 		if (isOrtho)

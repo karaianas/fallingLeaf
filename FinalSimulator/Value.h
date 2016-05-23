@@ -17,7 +17,7 @@ public:
 	// 0.1m * 1.0m paper; mass is 0.700kg
 	// 0.1m * 0.5m paper; mass is 0.350kg
 	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 20.0f, double _k_hor = 0.2f, double _len = 0.1f, double _den = 0.1f, \
-		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = -10.1f)
+		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = -10.1f)//double _theta_0 = -0.1f, double _w_0 = -0.01f)
 	{
 		g = _g;// gravity
 		t = _t;// physical time

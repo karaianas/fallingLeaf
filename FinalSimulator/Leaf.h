@@ -167,14 +167,14 @@ public:
 		vertex.push_back(vec3(4, 8, 9));
 	}
 
-	// draw a single leaf
+	// draw rectangular plane
 	void draw_leaf()
 	{
 		glPushMatrix();
 		glTranslated(x, y, z);
 		glRotated(theta, 0, 0, 1);
 		glScaled(10 * l, 1, 10 * w);
-		//glScaled(10, 10, 10);
+		//glScaled(5, 1, 10);
 
 		// front face
 		glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
@@ -198,6 +198,7 @@ public:
 		glPopMatrix();
 	}
 
+	// draw leaf plane
 	void draw_leaf2()
 	{
 		glPushMatrix();
@@ -206,7 +207,8 @@ public:
 		glScaled(1 * l, 1, 1 * w);
 
 		// front face
-		glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
+		//glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
+		glColor3f(0.333, 0.4196, 0.1843);
 		for (int i = 0; i < vertex.size(); i++)
 		{
 			glBegin(GL_TRIANGLES);
@@ -230,12 +232,52 @@ public:
 		glPopMatrix();
 	}
 
-	// draw center of mass of the leaf
-	void draw_center_of_mass()
+	// draw a 3D disc
+	void draw_leaf3()
 	{
-		glColor3f(0.2, 1.0, 0.5);
+		glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
+		//glColor3f(0.8, 0.8, 0.8);
 		glPushMatrix();
 		glTranslated(x, y, z);
+		glRotated(theta, 0, 0, 1);
+		glScaled(5, 0.5, 5);//0.5, 5, 5
+		glutSolidSphere(1, 30, 30);
+		glPushMatrix();
+		glColor3f(0.276471, 0.558824, 0.139216);// Color darker Green Yellow 
+		//glColor3f(0.2, 0.2, 0.2);
+		glTranslated(0, 0.5, 0);
+		glutSolidSphere(1, 30, 30);
+		glPopMatrix();
+		glPopMatrix();
+	}
+
+	// draw a 3D cuboid
+	void draw_leaf4()
+	{
+		glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
+		glPushMatrix();
+		glTranslated(x, y, z);
+		glRotated(theta, 0, 0, 1);
+		glScaled(1, 5, 10);
+		glutSolidCube(1);
+		glPushMatrix();
+		glColor3f(0.276471, 0.558824, 0.139216);// Color darker Green Yellow 
+		glTranslated(1, 0, 0);
+		glutSolidCube(1);
+		glPopMatrix();
+		glPopMatrix();
+	}
+
+	// draw center of mass of the leaf
+	void draw_center_of_mass(bool ortho)
+	{
+		//glColor3f(0.2, 1.0, 0.5);
+		glColor3f(0, 0, 1);
+		glPushMatrix();
+		if (ortho)
+			glTranslated(x, y, 10);
+		else
+			glTranslated(x, y, z);
 		glutSolidSphere(0.2, 10, 10);
 		glPopMatrix();
 	}

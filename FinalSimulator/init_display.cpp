@@ -42,5 +42,6 @@ void init_display(bool ortho)
 
 	//gluLookAt(0, 0, 20, 0.0, 0, 0.0, 0, 1.0, 0.0);// eye, at, up
 	//gluLookAt(0, 0, 200, 0.0, 0, 0.0, 0, 1.0, 0.0);// eye, at, up
-	gluLookAt(0, 0, 150, 0.0, 0, 0.0, 0, 1.0, 0.0);// eye, at, up
+	gluLookAt(0, 0, 150, 0.0, 0, 0.0, 0, 1.0, 0.0);// original
+	//gluLookAt(0, 0, 100, 0.0, 0, 0.0, 0, 1.0, 0.0);// for Fig. 1
 }

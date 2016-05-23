@@ -32,10 +32,10 @@
     <ClCompile Include="init_display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lab_config.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="lab_config.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
