@@ -19,6 +19,7 @@ void lab_config()
 	glVertex3d(0, 0, 0);
 	glEnd();
 
+	
 	// xy-plane
 	for (int i = 0; i <= 100; i += 5)
 	{
@@ -32,7 +33,7 @@ void lab_config()
 		glVertex3f(-50 + i, 0, -50);
 		glEnd();
 	}
-
+	/*
 	// yz-plane
 	for (int i = 0; i <= 100; i += 5)
 	{
@@ -46,7 +47,7 @@ void lab_config()
 		glVertex3f(-50, 0, -50 + i);
 		glEnd();
 	}
-	
+	*/
 	// zx-plane
 	for (int i = 0; i <= 100; i += 5)
 	{

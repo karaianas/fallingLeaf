@@ -37,9 +37,10 @@ public:
 		theta = angT;
 
 		// aspect ratio considered
-		w = 0.1 / len;
+		//w = 0.1 / len;
+		w = len;
 
-		import_texture();
+		//import_texture();
 	}
 
 	// import texture and vertices
@@ -233,18 +234,27 @@ public:
 	}
 
 	// draw a 3D disc
-	void draw_leaf3()
+	void draw_leaf3(int rgb)
 	{
-		glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow 
-		//glColor3f(0.8, 0.8, 0.8);
+		if (rgb == 1)
+			glColor3f(0.9412, 0.6667, 0.6667);// Light Red
+		else if (rgb == 3)
+			glColor3f(0.5098, 0.8784, 0.9216);// Light Blue
+		else
+			glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow
 		glPushMatrix();
 		glTranslated(x, y, z);
 		glRotated(theta, 0, 0, 1);
-		glScaled(5, 0.5, 5);//0.5, 5, 5
+		//glScaled(10 * l, 0.5, 10 * w);//5, 0.5, 5
+		glScaled(5, 0.5, 5);//5, 0.5, 5
 		glutSolidSphere(1, 30, 30);
 		glPushMatrix();
-		glColor3f(0.276471, 0.558824, 0.139216);// Color darker Green Yellow 
-		//glColor3f(0.2, 0.2, 0.2);
+		if (rgb == 1)
+			glColor3f(0.8235, 0.2784, 0.2784);// Dark Red
+		else if (rgb == 3)
+			glColor3f(0.2353, 0.5216, 0.7686);// Dark Blue
+		else
+			glColor3f(0.276471, 0.558824, 0.139216);// Dark Green
 		glTranslated(0, 0.5, 0);
 		glutSolidSphere(1, 30, 30);
 		glPopMatrix();
@@ -258,24 +268,28 @@ public:
 		glPushMatrix();
 		glTranslated(x, y, z);
 		glRotated(theta, 0, 0, 1);
-		glScaled(1, 5, 10);
+		glScaled(0.5, 5, 10);
 		glutSolidCube(1);
 		glPushMatrix();
 		glColor3f(0.276471, 0.558824, 0.139216);// Color darker Green Yellow 
-		glTranslated(1, 0, 0);
+		glTranslated(0.5, 0, 0);
 		glutSolidCube(1);
 		glPopMatrix();
 		glPopMatrix();
 	}
 
 	// draw center of mass of the leaf
-	void draw_center_of_mass(bool ortho)
+	void draw_center_of_mass(bool ortho, int rgb)
 	{
-		//glColor3f(0.2, 1.0, 0.5);
-		glColor3f(0, 0, 1);
+		if (rgb == 1)
+			glColor3f(1, 0.5667, 0.5667);// Light Red
+		else if (rgb == 3)
+			glColor3f(0.4098, 0.7784, 1);// Light Blue
+		else
+			glColor3f(0.476471, 1, 0.339216);// Color Green Yellow
 		glPushMatrix();
 		if (ortho)
-			glTranslated(x, y, 10);
+			glTranslated(x, y, z);
 		else
 			glTranslated(x, y, z);
 		glutSolidSphere(0.2, 10, 10);
@@ -308,4 +322,13 @@ private:
 
 	vector<vec3> point;
 	vector<vec3> vertex;
+	
+	//// color
+	//float lr[3] = { 0.9412, 0.6667, 0.6667 };
+	//float lg[3] = { 0.576471, 0.858824, 0.439216 };
+	//float lb[3] = { 0.5098, 0.8784, 0.9216 };
+
+	//float dr[3] = { 0.8235, 0.2784, 0.2784 };
+	//float dg[3] = { 0.276471, 0.558824, 0.139216 };
+	//float db[3] = { 0.2353, 0.5216, 0.7686 };
 };
