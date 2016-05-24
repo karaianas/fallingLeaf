@@ -104,6 +104,7 @@ void display()
 
 	lab_config();
 
+	// view trace
 	if (view == 1)
 	{
 		for (int i = 0; i < num; i += 1)//200---------------------------------------------------------------
@@ -111,19 +112,20 @@ void display()
 			if (isCM)
 			{
 				trace_pointer->at(i)->draw_center_of_mass(isOrtho);
-				//if (i * 200 < num)//58
-				//	trace_pointer->at(i * 200)->draw_leaf3();
+				//if (i * 300 < num)//58
+				//	trace_pointer->at(i * 300)->draw_leaf3();
 			}
 			else
-				trace_pointer->at(i)->draw_leaf3();
+				trace_pointer->at(i)->draw_leaf();
 		}
 	}
+	// view real-time
 	else
 	{
 		if (isCM)
 			trace_pointer->at(rt)->draw_center_of_mass(isOrtho);
 		else
-			trace_pointer->at(rt)->draw_leaf();
+			trace_pointer->at(rt)->draw_leaf3();
 	}
 	
 	glPopMatrix();

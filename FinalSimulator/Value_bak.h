@@ -1,5 +1,5 @@
 /*
-Value Class
+	Value Class
 */
 #pragma once
 
@@ -16,7 +16,7 @@ public:
 	// den is 0.143f for book paper
 	// 0.1m * 1.0m paper; mass is 0.700kg
 	// 0.1m * 0.5m paper; mass is 0.350kg
-	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 1.0f, double _k_hor = 0.01f, double _len = 1.0f, double _den = 0.1f, \
+	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 20.0f, double _k_hor = 0.2f, double _len = 0.1f, double _den = 0.1f, \
 		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = 10.1f)//double _theta_0 = -0.1f, double _w_0 = -0.01f)
 	{
 		g = _g;// gravity
@@ -60,7 +60,7 @@ public:
 
 	void set_density(double density)
 	{
-
+		
 		den = density;
 	}
 
@@ -165,39 +165,18 @@ public:
 		double a = 0;
 		a = alpha(u_0, v_0);
 
-		//// place theta_0 in range of (-90, 90)
-		//while ((theta_0 >= 90) || (theta_0 <= -90))
-		//{
-		//	if (theta_0 >= 90 && theta_0 < 270)
-		//		theta_0 = theta_0 - 180;
-		//	else if (theta_0 >= 270 && theta_0 < 360)
-		//		theta_0 = 180 - theta_0;
-		//	else if (theta_0 <= -90 && theta_0 > -270)
-		//		theta_0 = -theta_0 - 180;
-		//	else if (theta_0 <= -270 && theta_0 > -360)
-		//		theta_0 = -180 + theta_0;
-		//}
-
 		// place theta_0 in range of (-90, 90)
-		//while (theta_0 > 90)
-		//{
-			if ((theta_0 > 90) && (theta_0 <= 180))
+		while ((theta_0 >= 90) || (theta_0 <= -90))
+		{
+			if (theta_0 >= 90 && theta_0 < 270)
 				theta_0 = theta_0 - 180;
-			else if ((theta_0 > 180) && (theta_0 <= 270))
-				theta_0 = theta_0 - 270;
-			else if ((theta_0 > 270) && (theta_0 <= 360))
-				theta_0 = theta_0 - 360;
-		//}
-
-		//while (theta_0 < -90)
-		//{
-			if ((theta_0 < -90) && (theta_0 >= -180))
-				theta_0 = theta_0 + 180;
-			else if ((theta_0 < -180) && (theta_0 >= -270))
-				theta_0 = theta_0 + 270;
-			else if ((theta_0 < -270) && (theta_0 >= -360))
-				theta_0 = theta_0 + 360;
-		//}
+			else if (theta_0 >= 270 && theta_0 < 360)
+				theta_0 = 180 - theta_0;
+			else if (theta_0 <= -90 && theta_0 > -270)
+				theta_0 = -theta_0 - 180;
+			else if (theta_0 <= -270 && theta_0 > -360)
+				theta_0 = -180 + theta_0;
+		}
 
 		double s = 0;
 		s = sign(v_0, a, theta_0);
@@ -248,48 +227,29 @@ public:
 			theta_1 += 360;
 
 		// place theta_1 in range of (-90, 90)
-		//while ((theta_1 >= 90) || (theta_1 <= -90))
-		//{
-		//	if (theta_1 >= 90 && theta_1 < 270)
-		//		theta_1 = theta_1 - 180;
-		//	else if (theta_1 >= 270 && theta_1 < 360)
-		//		theta_1 = 180 - theta_1;
-		//	else if (theta_1 <= -90 && theta_1 > -270)
-		//		theta_1 = -theta_1 - 180;
-		//	else if (theta_1 <= -270 && theta_1 > -360)
-		//		theta_1 = -180 + theta_1;
-		//}
-		//while (theta_0 > 90)
-		//{
-			if ((theta_0 > 90) && (theta_0 <= 180))
-				theta_0 = theta_0 - 180;
-			else if ((theta_0 > 180) && (theta_0 <= 270))
-				theta_0 = theta_0 - 270;
-			else if ((theta_0 > 270) && (theta_0 <= 360))
-				theta_0 = theta_0 - 360;
-		//}
-
-		//while (theta_0 < -90)
-		//{
-			if ((theta_0 < -90) && (theta_0 >= -180))
-				theta_0 = theta_0 + 180;
-			else if ((theta_0 < -180) && (theta_0 >= -270))
-				theta_0 = theta_0 + 270;
-			else if ((theta_0 < -270) && (theta_0 >= -360))
-				theta_0 = theta_0 + 360;
-		//}
+		while ((theta_1 >= 90) || (theta_1 <= -90))
+		{
+			if (theta_1 >= 90 && theta_1 < 270)
+				theta_1 = theta_1 - 180;
+			else if (theta_1 >= 270 && theta_1 < 360)
+				theta_1 = 180 - theta_1;
+			else if (theta_1 <= -90 && theta_1 > -270)
+				theta_1 = -theta_1 - 180;
+			else if (theta_1 <= -270 && theta_1 > -360)
+				theta_1 = -180 + theta_1;
+		}
 
 		// actual angle
 		double phi_1 = 0;
 
 		phi_1 = phi_0 + (180.0 / pi * (w_0 + w_1)) / 2 * t;
 
-		while (phi_1 >= 360)
+		while (phi_1 > 360)
 		{
 			phi_1 -= 360;
 			turns += 2;
 		}
-		while (phi_1 <= -360)
+		while (phi_1 < -360)
 		{
 			phi_1 += 360;
 			turns += 2;

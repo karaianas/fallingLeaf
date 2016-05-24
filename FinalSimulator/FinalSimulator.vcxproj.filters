@@ -21,10 +21,10 @@
     <ClInclude Include="Leaf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Value.h">
+    <ClInclude Include="vec3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="vec3.h">
+    <ClInclude Include="Value.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
