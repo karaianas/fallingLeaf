@@ -16,8 +16,8 @@ public:
 	// den is 0.143f for book paper
 	// 0.1m * 1.0m paper; mass is 0.700kg
 	// 0.1m * 0.5m paper; mass is 0.350kg
-	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 1.0f, double _k_hor = 0.01f, double _len = 1.0f, double _den = 0.1f, \
-		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = 10.1f)//double _theta_0 = -0.1f, double _w_0 = -0.01f)
+	Value(double _g = 9.807f, double _t = 0.01f, double _k_ver = 20.0f, double _k_hor = 0.2f, double _len = 0.1f, double _den = 0.1f, \
+		double _x_0 = 0.0f, double _y_0 = 100.0f, double _u_0 = 0.00001f, double _v_0 = 0.00001f, double _theta_0 = -60, double _w_0 = -10.1f)//10.1f)//double _theta_0 = -0.1f, double _w_0 = -0.01f)
 	{
 		g = _g;// gravity
 		t = _t;// physical time
@@ -38,6 +38,8 @@ public:
 		phi_0 = theta_0;
 
 		turns = 1;// number of turns
+
+		z = 0;
 
 	}
 
@@ -64,10 +66,11 @@ public:
 		den = density;
 	}
 
-	void set_position(double x, double y)
+	void set_position(double x, double y, double _z)
 	{
 		x_0 = x;
 		y_0 = y;
+		z = _z;
 	}
 
 	void set_velocity(double u, double v)
@@ -96,6 +99,11 @@ public:
 		t = _time;
 	}
 
+	void set_z(double _z)
+	{
+		z = _z;
+	}
+
 	// get functions
 	double get_y()
 	{
@@ -109,7 +117,7 @@ public:
 
 	double get_z()
 	{
-		return 0.0f;
+		return z;
 	}
 
 	double get_length()
@@ -165,52 +173,46 @@ public:
 		double a = 0;
 		a = alpha(u_0, v_0);
 
-		//// place theta_0 in range of (-90, 90)
-		//while ((theta_0 >= 90) || (theta_0 <= -90))
-		//{
-		//	if (theta_0 >= 90 && theta_0 < 270)
-		//		theta_0 = theta_0 - 180;
-		//	else if (theta_0 >= 270 && theta_0 < 360)
-		//		theta_0 = 180 - theta_0;
-		//	else if (theta_0 <= -90 && theta_0 > -270)
-		//		theta_0 = -theta_0 - 180;
-		//	else if (theta_0 <= -270 && theta_0 > -360)
-		//		theta_0 = -180 + theta_0;
-		//}
-
 		// place theta_0 in range of (-90, 90)
-		//while (theta_0 > 90)
-		//{
-			if ((theta_0 > 90) && (theta_0 <= 180))
-				theta_0 = theta_0 - 180;
-			else if ((theta_0 > 180) && (theta_0 <= 270))
-				theta_0 = theta_0 - 270;
-			else if ((theta_0 > 270) && (theta_0 <= 360))
-				theta_0 = theta_0 - 360;
-		//}
+		if ((theta_0 > 90) && (theta_0 <= 180))
+			theta_0 = theta_0 - 180;
+		else if ((theta_0 > 180) && (theta_0 <= 270))
+			theta_0 = theta_0 - 270;
+		else if ((theta_0 > 270) && (theta_0 <= 360))
+			theta_0 = theta_0 - 360;
 
-		//while (theta_0 < -90)
-		//{
-			if ((theta_0 < -90) && (theta_0 >= -180))
-				theta_0 = theta_0 + 180;
-			else if ((theta_0 < -180) && (theta_0 >= -270))
-				theta_0 = theta_0 + 270;
-			else if ((theta_0 < -270) && (theta_0 >= -360))
-				theta_0 = theta_0 + 360;
-		//}
+		if ((theta_0 < -90) && (theta_0 >= -180))
+			theta_0 = theta_0 + 180;
+		else if ((theta_0 < -180) && (theta_0 >= -270))
+			theta_0 = theta_0 + 270;
+		else if ((theta_0 < -270) && (theta_0 >= -360))
+			theta_0 = theta_0 + 360;
 
 		double s = 0;
 		s = sign(v_0, a, theta_0);
 
 		// Translational
 		// acceleration
+
+		/* Original Eqn. */
+		/* Mass increases as length increases i.e. total area considered */
 		udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
-			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
-			+ s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
+					+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
+					+ s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
 
 		vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
-			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
-			- s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
+					+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
+					- s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
+
+		/* New Eqn. */
+		/* Mass conserved as length increases i.e. aspect ratio considered */
+		//udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
+		//	+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
+		//	+ s * len * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
+
+		//vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
+		//	+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
+		//	- s * len * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
 
 		// velocity
 		double u_1 = 0;
@@ -230,6 +232,16 @@ public:
 		// acceleration
 		double wdot = 0;
 
+		/* Original + New Eqn. */
+		/* Mass increases as length increases i.e. total area considered */
+		//wdot = -k_ver * len * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
+
+		/* New Eqn. */
+		/* Mass conserved as length increases i.e. aspect ratio considered */
+		//wdot = -k_ver * len * w_0 - (3 * pi * len * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
+
+		/* Original Eqn. */
+		/* Mass increases as length increases i.e. total area considered */
 		wdot = -k_ver * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
 
 		// velocity
@@ -248,36 +260,20 @@ public:
 			theta_1 += 360;
 
 		// place theta_1 in range of (-90, 90)
-		//while ((theta_1 >= 90) || (theta_1 <= -90))
-		//{
-		//	if (theta_1 >= 90 && theta_1 < 270)
-		//		theta_1 = theta_1 - 180;
-		//	else if (theta_1 >= 270 && theta_1 < 360)
-		//		theta_1 = 180 - theta_1;
-		//	else if (theta_1 <= -90 && theta_1 > -270)
-		//		theta_1 = -theta_1 - 180;
-		//	else if (theta_1 <= -270 && theta_1 > -360)
-		//		theta_1 = -180 + theta_1;
-		//}
-		//while (theta_0 > 90)
-		//{
-			if ((theta_0 > 90) && (theta_0 <= 180))
-				theta_0 = theta_0 - 180;
-			else if ((theta_0 > 180) && (theta_0 <= 270))
-				theta_0 = theta_0 - 270;
-			else if ((theta_0 > 270) && (theta_0 <= 360))
-				theta_0 = theta_0 - 360;
-		//}
+		if ((theta_1 > 90) && (theta_1 <= 180))
+			theta_1 = theta_1 - 180;
+		else if ((theta_1 > 180) && (theta_1 <= 270))
+			theta_1 = theta_1 - 270;
+		else if ((theta_1 > 270) && (theta_1 <= 360))
+			theta_1 = theta_1 - 360;
 
-		//while (theta_0 < -90)
-		//{
-			if ((theta_0 < -90) && (theta_0 >= -180))
-				theta_0 = theta_0 + 180;
-			else if ((theta_0 < -180) && (theta_0 >= -270))
-				theta_0 = theta_0 + 270;
-			else if ((theta_0 < -270) && (theta_0 >= -360))
-				theta_0 = theta_0 + 360;
-		//}
+		if ((theta_1 < -90) && (theta_1 >= -180))
+			theta_1 = theta_1 + 180;
+		else if ((theta_1 < -180) && (theta_1 >= -270))
+			theta_1 = theta_1 + 270;
+		else if ((theta_1 < -270) && (theta_1 >= -360))
+			theta_1 = theta_1 + 360;
+
 
 		// actual angle
 		double phi_1 = 0;
@@ -309,5 +305,6 @@ public:
 
 private:
 	double g, t, k_ver, k_hor, len, den, x_0, y_0, u_0, v_0, theta_0, w_0, phi_0;
+	double z;
 	int turns;
 };
