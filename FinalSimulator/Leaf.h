@@ -236,29 +236,64 @@ public:
 	// draw a 3D disc
 	void draw_leaf3(int rgb)
 	{
+		/*
+		// cuboid
 		if (rgb == 1)
 			glColor3f(0.9412, 0.6667, 0.6667);// Light Red
 		else if (rgb == 3)
 			glColor3f(0.5098, 0.8784, 0.9216);// Light Blue
 		else
 			glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow
+
 		glPushMatrix();
 		glTranslated(x, y, z);
 		glRotated(theta, 0, 0, 1);
-		//glScaled(10 * l, 0.5, 10 * w);//5, 0.5, 5
-		glScaled(5, 0.5, 5);//5, 0.5, 5
-		glutSolidSphere(1, 30, 30);
+		glScaled(0.5, 10 * l, 10 * w);// 0.5, 5, 10
+		glutSolidCube(1);
 		glPushMatrix();
+
 		if (rgb == 1)
 			glColor3f(0.8235, 0.2784, 0.2784);// Dark Red
 		else if (rgb == 3)
 			glColor3f(0.2353, 0.5216, 0.7686);// Dark Blue
 		else
 			glColor3f(0.276471, 0.558824, 0.139216);// Dark Green
+
+		glTranslated(0.5, 0, 0);
+		glutSolidCube(1);
+		glPopMatrix();
+		glPopMatrix();
+		*/
+
+		
+		// disc
+		if (rgb == 1)
+			glColor3f(0.9412, 0.6667, 0.6667);// Light Red
+		else if (rgb == 3)
+			glColor3f(0.5098, 0.8784, 0.9216);// Light Blue
+		else
+			glColor3f(0.576471, 0.858824, 0.439216);// Color Green Yellow
+
+		glPushMatrix();
+		glTranslated(x, y, z);
+		glRotated(theta, 0, 0, 1);
+		//glScaled(10 * l, 0.5, 10 * w);//5, 0.5, 5
+		glScaled(5 * l, 0.5, 5 * w);// 3, 0.5, 3 // 5, 0.5, 5
+		glutSolidSphere(1, 30, 30);
+		glPushMatrix();
+
+		if (rgb == 1)
+			glColor3f(0.8235, 0.2784, 0.2784);// Dark Red
+		else if (rgb == 3)
+			glColor3f(0.2353, 0.5216, 0.7686);// Dark Blue
+		else
+			glColor3f(0.276471, 0.558824, 0.139216);// Dark Green
+
 		glTranslated(0, 0.5, 0);
 		glutSolidSphere(1, 30, 30);
 		glPopMatrix();
 		glPopMatrix();
+		
 	}
 
 	// draw a 3D cuboid

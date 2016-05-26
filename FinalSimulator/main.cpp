@@ -67,7 +67,7 @@ int main(int argc, char** argv)
 	clock_t begin = clock();
 
 	Value* V1 = new Value();
-	//V1->set_length(0.12);
+	V1->set_length(1.0);
 	//V1->set_density(0.05);
 	//V1->set_friction(2, 0.2);
 	Exp E1(V1);
@@ -219,8 +219,8 @@ void display()
 			{
 				//glPushMatrix();
 				//glRotated(0.1 * rt, 0, 1, 0);
-				//trace_pointer->at(rt)->draw_leaf3(2);
-				trace_pointer->at(rt)->draw_leaf4();
+				trace_pointer->at(rt)->draw_leaf3(2);
+				//trace_pointer->at(rt)->draw_leaf4();
 				//glPopMatrix();
 			}
 		}
@@ -272,23 +272,23 @@ void display()
 					//glPopMatrix();
 				}
 				// object
-				for (int i = 0; i < num; i += 100)
+				for (int i = 0; i < num; i += 510)//10)//50)//100)
 				{
 					//glPushMatrix();
 					//glRotated(0.1 * i, 0, 1, 0);
-					//trace_pointer->at(i)->draw_leaf3(2);
-					trace_pointer->at(i)->draw_leaf4();
+					trace_pointer->at(i)->draw_leaf3(2);
+					//trace_pointer->at(i)->draw_leaf4();
 					//glPopMatrix();
 				}
 			}
 			else
 			{
-				for (int i = 0; i < num; i += 100)
+				for (int i = 0; i < num; i += 510)//50)//100)
 				{
 					//glPushMatrix();
 					//glRotated(0.1 * i, 0, 1, 0);
-					//trace_pointer->at(i)->draw_leaf3(2);
-					trace_pointer->at(i)->draw_leaf4();
+					trace_pointer->at(i)->draw_leaf3(2);
+					//trace_pointer->at(i)->draw_leaf4();
 					//glPopMatrix();
 				}
 			}

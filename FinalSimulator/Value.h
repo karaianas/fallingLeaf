@@ -242,7 +242,7 @@ public:
 
 		/* Original Eqn. */
 		/* Mass increases as length increases i.e. total area considered */
-		wdot = -k_ver * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
+		 wdot = -k_ver * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
 
 		// velocity
 		double w_1 = 0;
