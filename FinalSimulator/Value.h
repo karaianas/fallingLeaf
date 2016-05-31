@@ -194,25 +194,37 @@ public:
 		// Translational
 		// acceleration
 
-		/* Original Eqn. */
-		/* Mass increases as length increases i.e. total area considered */
-		udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
-					+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
-					+ s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
+		// (1) Original Eqn
 
-		vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
-					+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
-					- s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
+		/* Original Eqn. */
+		/* Mass increases as length increases i.e. total area considered but NOT the aspect ratio */
+		//udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
+		//			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
+		//			+ s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
+
+		//vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
+		//			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
+		//			- s * den * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
+
+		/* New Eqn. */
+		/* Mass increases as length increases i.e. total area AND the aspect ratio considered */
+		//udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
+		//			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
+		//			+ s * pow(len, 2) * 10 * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
+
+		//vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
+		//			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
+		//			- s * pow(len, 2) * 10 * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
 
 		/* New Eqn. */
 		/* Mass conserved as length increases i.e. aspect ratio considered */
-		//udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
-		//	+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
-		//	+ s * len * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
+		udot = -(k_ver * pow(sin(pi / 180.0 * theta_0), 2) + k_hor * pow(cos(pi / 180.0 * theta_0), 2)) * u_0\
+			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * v_0\
+			+ s * len * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * cos(pi / 180.0 * a);
 
-		//vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
-		//	+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
-		//	- s * len * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
+		vdot = -(k_ver * pow(cos(pi / 180.0 * theta_0), 2) + k_hor * pow(sin(pi / 180.0 * theta_0), 2)) * v_0\
+			+ (k_ver - k_hor) * sin(pi / 180.0 * theta_0) * cos(pi / 180.0 * theta_0) * u_0\
+			- s * len * pow(V, 2) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a) - g;
 
 		// velocity
 		double u_1 = 0;
@@ -232,17 +244,21 @@ public:
 		// acceleration
 		double wdot = 0;
 
-		/* Original + New Eqn. */
-		/* Mass increases as length increases i.e. total area considered */
+		/* New Eqn. */
+		/* Mass increases as length increases i.e. total area considered but NOT the aspect ratio */
 		//wdot = -k_ver * len * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
 
 		/* New Eqn. */
+		/* Mass increases as length increases i.e. total area AND the aspect ratio considered*/
+		//wdot = -k_ver * pow(len, 2) * 10 * w_0 - (3 * pi * pow(len, 2) * 10 * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
+
+		/* New Eqn. */
 		/* Mass conserved as length increases i.e. aspect ratio considered */
-		//wdot = -k_ver * len * w_0 - (3 * pi * len * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
+		wdot = -k_ver * len * w_0 - (3 * pi * len * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
 
 		/* Original Eqn. */
-		/* Mass increases as length increases i.e. total area considered */
-		 wdot = -k_ver * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
+		/* Mass increases as length increases i.e. total area considered but NOT the aspect ratio */
+		//wdot = -k_ver * w_0 - (3 * pi * den * pow(V, 2) / len) * cos(pi / 180.0 * a + pi / 180.0 * theta_0) * sin(pi / 180.0 * a + pi / 180.0 * theta_0);
 
 		// velocity
 		double w_1 = 0;

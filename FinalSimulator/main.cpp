@@ -67,7 +67,8 @@ int main(int argc, char** argv)
 	clock_t begin = clock();
 
 	Value* V1 = new Value();
-	V1->set_length(1.0);
+	V1->set_position(50, 100, 0);//50, 100, 20
+	//V1->set_length(1.0);
 	//V1->set_density(0.05);
 	//V1->set_friction(2, 0.2);
 	Exp E1(V1);
@@ -82,7 +83,7 @@ int main(int argc, char** argv)
 	num2 = E2.get_size();
 
 	Value* V3 = new Value();
-	//V3->set_position(-40, 100, -30);
+	V3->set_position(50, 100, -20);
 	//V3->set_friction(15.0, 0.15);
 	//V3->set_length(1.0);
 	V3->set_length(0.05);
@@ -272,7 +273,7 @@ void display()
 					//glPopMatrix();
 				}
 				// object
-				for (int i = 0; i < num; i += 510)//10)//50)//100)
+				for (int i = 0; i < num; i += 190)
 				{
 					//glPushMatrix();
 					//glRotated(0.1 * i, 0, 1, 0);
@@ -283,7 +284,7 @@ void display()
 			}
 			else
 			{
-				for (int i = 0; i < num; i += 510)//50)//100)
+				for (int i = 0; i < num; i += 190)
 				{
 					//glPushMatrix();
 					//glRotated(0.1 * i, 0, 1, 0);
